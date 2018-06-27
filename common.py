@@ -10,10 +10,13 @@ def generate_data(n1, n2, x_num, y_sigma=1):
     for i in range(0, x_num):
         p = np.rand()
         p_sum = 0
+        n11_num = 0
         for x in x_info:
             p_sum += x[1]
             if p_sum >= p:
                 x_data.append(eval(x[0]))
+                if x[0] == "(1,1)":
+                    n11_num += 1
                 break
 
     for i in range(0, x_num):
@@ -27,6 +30,6 @@ def generate_data(n1, n2, x_num, y_sigma=1):
 
         y_data.append(tuple(y)) 
 
-    return (x_data, y_data)
+    return (x_data, y_data, n11_num)
 
 
