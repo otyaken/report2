@@ -21,7 +21,7 @@ def SG(y, threshold, n1, n2, y_sigma):
 
         for y2 in y2_data:
             exp_sum += (1 - 2*y2 + 2*y2*x2 - x2**2) / (2 * y_sigma * y_sigma)
-
+        
         p_sum += x[1] * math.exp(exp_sum)
 
     ans = p_sum / p_x11
@@ -45,7 +45,7 @@ def ST(y, threshold, n1, n2, y_sigma):
     #p(x11)の確率
     p_x11 = x_info[3][1]
 
-    p_sum = 0
+    exp_sum = 0
 
     for y1 in y1_data:
         exp_sum += (1 - 2*y1) / (2 * y_sigma * y_sigma)
