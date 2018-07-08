@@ -7,9 +7,11 @@ import matplotlib.pyplot as plt
 
 n1 = 3
 n2 = 3
-x_num = 100000
+x_num = 1000
 
-(x_data, y_data, x11_num) = generate_data(n1, n2, x_num, y_sigma=5)
+Y_SIGMA = 1
+
+(x_data, y_data, x11_num) = generate_data(n1, n2, x_num, y_sigma=Y_SIGMA)
 
 
 fpr_list = []
@@ -20,7 +22,7 @@ for threshold in threshold_list:
     fpr_count = 0
     cdr_count = 0
     for data in zip(x_data, y_data):
-        result = SG(data[1], threshold, n1, n2, y_sigma=5)
+        result = SG(data[1], threshold, n1, n2, y_sigma=Y_SIGMA)
         if data[0] == (1,1) and result == 1: 
             cdr_count += 1
    
@@ -42,7 +44,7 @@ for threshold in threshold_list:
     fpr_count = 0
     cdr_count = 0
     for data in zip(x_data, y_data):
-        result = ST(data[1], threshold, n1, n2, y_sigma=5)
+        result = ST(data[1], threshold, n1, n2, y_sigma=Y_SIGMA)
         if data[0] == (1,1) and result == 1: 
             cdr_count += 1
    
