@@ -26,7 +26,7 @@ def generate_data(n1, n2, x_num, y_sigma=1):
             y.append(np.random.normal(x_data[i][0], y_sigma))
         #y2の生成
         for k in range(0, n2):
-            y.append(np.random.normal(x_data[i][0], y_sigma))
+            y.append(np.random.normal(x_data[i][1], y_sigma))
 
         y_data.append(tuple(y)) 
     
