@@ -39,7 +39,7 @@ def SG(y, threshold, n1, n2, y_sigma):
 def ST(y, threshold, n1, n2, y_sigma):
     x_info = [((0,0), 0.6), ((0,1), 0.1), ((1,0),0.1), ((1,1), 0.2)]
     y1_data = y[0:n1]
-    y2_data = y[n1:n2]
+    y2_data = y[n1:n1+n2]
     
     #p(x00)の確率
     p_x00 = x_info[0][1]
