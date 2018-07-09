@@ -65,4 +65,43 @@ def ST(y, threshold, n1, n2, y_sigma):
 
     
 
+def SP1_2(y, threshold, n1, n2, y_sigma):
+    x_info = [((0,0), 0.6), ((0,1), 0.1), ((1,0),0.1), ((1,1), 0.2)]
 
+    y1_data = y[0:n1]
+    y2_data = y[n1:n1+n2]
+    
+
+    #p(x1=1)の確率
+    p_x1 = 0.3
+    #p(x1=0)の確率
+    p_x0 = 0.7
+    #p(x10)の確率
+    p_x10 = x_info[2][1]
+    #p(x11)の確率
+    p_x11 = x_info[3][1]
+
+    p_sum = 0
+    
+    for y1 in y1_data:
+        p_sum += (1 - 2*y1) / (2 * y_sigma * y_sigma)
+
+    ans_first = 1 + (p_x0 / p_x1) * math.exp(p_sum)
+
+    if 1 / ans_first < threshold:
+        #(1,1)でない
+        return 0
+    
+    p_sum = 0
+
+    for y2 in y2_data:
+        p_sum += (1 - 2*y2) / (2 * y_sigma * y_sigma)
+
+    ans_second = 1 + (p_x10 / p_x11) * math.exp(p_sum)
+    
+    if (1 / ans_first) * (1 / ans_second) >= threshold:
+        #(1,1)である
+        return 1
+    else:
+        #(1,1)でない
+        return 0
