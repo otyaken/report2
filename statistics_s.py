@@ -73,9 +73,17 @@ def SP1_2(y, threshold, n1, n2, y_sigma):
     
 
     #p(x1=1)の確率
-    p_x1 = 0.3
+    p_x1 = 0
+    for x in x_info:
+        if x[0][0] == 1:
+            p_x1 += x[1]
+
     #p(x1=0)の確率
-    p_x0 = 0.7
+    p_x0 = 0
+    for x in x_info:
+        if x[0][0] == 0:
+            p_x1 += x[1]
+
     #p(x10)の確率
     p_x10 = x_info[2][1]
     #p(x11)の確率
