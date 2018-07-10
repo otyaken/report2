@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 n1 = 3
 n2 = 3 
 x_num = 100000
-
+#x_num = 100
 Y_SIGMA = 1
 
 print("[+]Now SG")
@@ -42,6 +42,7 @@ cdr_list = []
 
 threshold_list = [i * 0.01 for i in range(0, 101)]
 for threshold in threshold_list:
+    (x_data, y_data, x11_num) = generate_data(n1, n2, x_num, y_sigma=Y_SIGMA)
     fpr_count = 0
     cdr_count = 0
     for data in zip(x_data, y_data):
@@ -65,6 +66,7 @@ cdr_list = []
 
 threshold_list = [i * 0.01 for i in range(0, 101)]
 for threshold in threshold_list:
+    (x_data, y_data, x11_num) = generate_data(n1, n2, x_num, y_sigma=Y_SIGMA)
     fpr_count = 0
     cdr_count = 0
     for data in zip(x_data, y_data):
@@ -81,5 +83,7 @@ for threshold in threshold_list:
 plt.plot(fpr_list, cdr_list, color="green", linewidth=1, label="SP")
 
 plt.grid(which='major',color='black',linestyle='-')
+plt.xlabel("False Positive Rate", fontsize=12)
+plt.ylabel("Correct Detect Rate", fontsize=12)
 plt.legend()
 plt.show()
