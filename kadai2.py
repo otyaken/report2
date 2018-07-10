@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from common import generate_data
-from statistics_s import SG, ST, SP1_2
+from statistics_s import SG, ST, SP1_2, SS
 
 import matplotlib.pyplot as plt
 
-n1 = 3
-n2 = 3 
+n1 = 10
+n2 = 10
 x_num = 100000
 #x_num = 100
 Y_SIGMA = 1
@@ -82,8 +82,33 @@ for threshold in threshold_list:
 
 plt.plot(fpr_list, cdr_list, color="green", linewidth=1, label="SP")
 
+print("[+]Now SS")
+
+fpr_list = []
+cdr_list = []
+
+threshold_list = [i * 0.01 for i in range(0, 101)]
+for threshold in threshold_list:
+    (x_data, y_data, x11_num) = generate_data(n1, n2, x_num, y_sigma=Y_SIGMA)
+    fpr_count = 0
+    cdr_count = 0
+    for data in zip(x_data, y_data):
+        result = SS(data[1], threshold, n1, n2, y_sigma=Y_SIGMA)
+        if data[0] == (1,1) and result == 1: 
+            cdr_count += 1
+   
+        if data[0] != (1,1) and result == 1:
+            fpr_count += 1
+
+    fpr_list.append(fpr_count/(x_num-x11_num))
+    cdr_list.append(cdr_count/x11_num)
+
+plt.plot(fpr_list, cdr_list, color="yellow", linewidth=1, label="SS")
+
+
+
 plt.grid(which='major',color='black',linestyle='-')
 plt.xlabel("False Positive Rate", fontsize=12)
 plt.ylabel("Correct Detect Rate", fontsize=12)
-plt.legend()
+plt.legend(loc ='lower right')
 plt.show()
