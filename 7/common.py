@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+
+import numpy as np
+
+def generate_data(n1, n2, x_num, y_sigma1=1, y_sigma2=1):
+    x_data = []
+    y_data = []
+    n11_num = 0
+    #xの生成
+    x_info = [("(0,0)", 0.6), ("(0,1)", 0.1), ("(1,0)",0.1), ("(1,1)", 0.2)]
+    for i in range(0, x_num):
+        p = np.random.rand()
+        p_sum = 0
+        for x in x_info:
+            p_sum += x[1]
+            if p_sum >= p:
+                x_data.append(eval(x[0]))
+                if eval(x[0]) == (1,1):
+                    n11_num += 1
+                break
+
+    for i in range(0, x_num):
+        y = []
+        #y1の生成
+        for k in range(0, n1):
+            y.append(np.random.normal(x_data[i][0], y_sigma1))
+        #y2の生成
+        for k in range(0, n2):
+            y.append(np.random.normal(x_data[i][1], y_sigma2))
+
+        y_data.append(tuple(y)) 
+    
+    return (x_data, y_data, n11_num)
+
+
